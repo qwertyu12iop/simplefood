@@ -11,6 +11,8 @@ import {
 import { useNavigate } from 'react-router-dom'; // 引入路由导航钩子
 import styles from './profile.module.css'
 
+import avatarImage from '@/assets/1.png';
+
 const Profile = () => {
   useTitle("我的");
   const navigate = useNavigate(); // 获取导航函数
@@ -26,7 +28,7 @@ const Profile = () => {
     nickname: '简小食',
     level: 'Lv3',
     slogan: '健康生活，从简食开始',
-    avatar: 'https://ts1.cn.mm.bing.net/th/id/OIP-C.WwerDsrl3Jfc3HPI8pyvpgHaHe?w=205&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
+    avatar: avatarImage, // Use the imported image variable
     points: 1280
   });
 
@@ -254,8 +256,6 @@ const Profile = () => {
           >
             <Image
               round
-              width="80px"
-              height="80px"
               src={userInfo.avatar}
               className={styles.avatar}
               alt="用户头像"

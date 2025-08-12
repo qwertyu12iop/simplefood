@@ -5,7 +5,7 @@ export default [
     {
         url: '/api/search',
         method: 'get',
-        timeout: 1000,
+        timeout: 0,
         response: (req, res) => {
             // 提取搜索关键词
             const keyword = req.query.keyword || '';

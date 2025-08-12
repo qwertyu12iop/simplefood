@@ -53,6 +53,7 @@ const SearchBox = ({
                     onFocus={onFocus}
                     placeholder="搜索美食、菜谱、食材..."
                     className={styles.searchInput}
+                
                 />
                 {value && (
                     <button

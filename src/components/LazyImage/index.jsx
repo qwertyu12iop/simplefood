@@ -18,7 +18,7 @@ const LazyImage = ({ src, aspectRatio = '300/200', alt }) => {
                 });
             },
             {
-                rootMargin: '100px 0px',
+                rootMargin: '300px 0px', // 增加预加载距离到300px
                 threshold: 0.01
             }
         );
@@ -80,6 +80,7 @@ const LazyImage = ({ src, aspectRatio = '300/200', alt }) => {
                     src={src}
                     alt={alt || '图片'}
                     loading="lazy"
+                    decoding="async" // 添加异步解码
                 />
             )}
         </div>

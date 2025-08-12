@@ -14,6 +14,8 @@ const Home = () => {
   useTitle('简食首页');
   const navigate = useNavigate();
   const bottomRef = useRef(null);
+  // 添加设备类型状态
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
 
   // 从 store 获取状态
   const activeTab = useHomeStore((s) => s.activeTab);
