@@ -1,0 +1,516 @@
+/* src/pages/Detail/detail.module.css */
+.container {
+    padding-bottom: 80px;
+    background-color: #f9fbf8;
+}
+
+/* 顶部封面图样式 */
+.coverContainer {
+    position: relative;
+    height: 45vh;
+    overflow: hidden;
+}
+
+.coverImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.headerActions {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.backButton {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: none;
+    color: #333;
+}
+
+.actionButton {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.actionButton.collected {
+    background: #ffc107;
+    color: #333;
+}
+
+/* 食谱基本信息 */
+.recipeInfo {
+    padding: 20px 16px;
+    background: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+    font-size: 24px;
+    margin: 0 0 12px;
+    color: #2c3e50;
+    line-height: 1.3;
+}
+
+.author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.authorName {
+    font-weight: 500;
+}
+
+.meta span {
+    margin-left: 12px;
+}
+
+.description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    gap: 8px;
+}
+
+.tag {
+    background: #e8f5e9;
+    color: #43a047;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.statItem {
+    text-align: center;
+    padding: 10px;
+    background: #f5fbf5;
+    border-radius: 10px;
+}
+
+.statValue {
+    font-weight: bold;
+    font-size: 16px;
+    color: #2e7d32;
+}
+
+.statLabel {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+/* 通用部分样式 */
+.section {
+    background: white;
+    padding: 20px 16px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+    font-size: 20px;
+    margin: 0 0 16px;
+    color: #2c3e50;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #4caf50;
+    border-radius: 3px;
+}
+
+/* 食材部分 */
+.ingredients {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.ingredients h3 {
+    font-size: 16px;
+    margin: 0 0 12px;
+    color: #2c3e50;
+    padding-left: 24px;
+    position: relative;
+}
+
+.ingredients h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: #4caf50;
+}
+
+.essentialIngredients h3::before {
+    background: #e91e63;
+}
+
+.ingredients ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.ingredients li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 14px;
+}
+
+.ingredientName {
+    color: #333;
+}
+
+.ingredientAmount {
+    color: #4caf50;
+    font-weight: 500;
+}
+
+/* 步骤部分 */
+.stepsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progressBar {
+    width: 80px;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: #4caf50;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.step {
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.step:last-child {
+    border-bottom: none;
+}
+
+.step.completed {
+    background: #f5fbf5;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0 -16px;
+    border-bottom: none;
+}
+
+.stepHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.stepNumber {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.checkboxContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    height: 18px;
+    width: 18px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-right: 8px;
+    position: relative;
+}
+
+.checkboxContainer input:checked~.checkmark {
+    background-color: #4caf50;
+    border-color: #4caf50;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkboxContainer input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkboxContainer .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.stepDescription {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.stepImage {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 营养成分 */
+.nutritionGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.nutritionItem {
+    text-align: center;
+    padding: 12px;
+    background: #f5fbf5;
+    border-radius: 10px;
+}
+
+.nutritionValue {
+    font-weight: bold;
+    font-size: 18px;
+    color: #2e7d32;
+}
+
+.nutritionLabel {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.healthTip {
+    display: flex;
+    background: #e8f5e9;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 15px;
+}
+
+.tipIcon {
+    font-size: 24px;
+    color: #4caf50;
+}
+
+.tipContent h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #2e7d32;
+}
+
+.tipContent p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* 底部按钮 */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.startButton {
+    background: linear-gradient(to right, #4caf50, #81c784);
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 加载状态 */
+.loadingContainer {
+    padding: 16px;
+}
+
+.skeletonCover {
+    height: 45vh;
+    background: #e0e0e0;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 20px;
+}
+
+.skeletonTitle {
+    height: 30px;
+    width: 80%;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.skeletonMeta {
+    height: 20px;
+    width: 60%;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.skeletonDescription {
+    height: 60px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.skeletonSection {
+    height: 24px;
+    width: 40%;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.skeletonList {
+    margin-bottom: 30px;
+}
+
+.skeletonListItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.skeletonCheckbox {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.skeletonText {
+    height: 16px;
+    flex: 1;
+    background: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeletonGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.skeletonGridItem {
+    height: 70px;
+    background: #e0e0e0;
+    border-radius: 10px;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.skeletonCover,
+.skeletonTitle,
+.skeletonMeta,
+.skeletonDescription,
+.skeletonSection,
+.skeletonText,
+.skeletonCheckbox,
+.skeletonGridItem {
+    animation: pulse 1.5s infinite; }

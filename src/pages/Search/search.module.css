@@ -1,0 +1,113 @@
+.searchContainer {
+    background-color: #f9fbf8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchHeader {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5ece9;
+}
+
+.backButton {
+    margin-right: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.searchInputWrapper {
+    flex: 1;
+}
+
+.searchButton {
+    background-color: #4a6d60 !important;
+    border: none;
+    margin-left: 8px;
+    border-radius: 20px;
+}
+
+.searchButton:active {
+    opacity: 0.85;
+}
+
+.searchContent {
+    flex: 1;
+    padding: 12px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sectionTitle {
+    margin-left: 6px;
+    font-weight: 600;
+    color: #4a6d60;
+}
+
+.hotTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hotTag {
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 14px;
+}
+
+.hotCount {
+    font-size: 12px;
+    margin-left: 4px;
+    color: #999;
+}
+
+.clearHistory {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.emptyHistory,
+.emptyState {
+    color: #95a5a6;
+    font-size: 14px;
+    text-align: center;
+    padding: 12px 0;
+}
+
+.suggestionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.suggestionItem {
+    cursor: pointer;
+}
+
+.loading {
+    text-align: center;
+    color: #4a6d60;
+    padding: 20px 0;
+}
