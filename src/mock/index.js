@@ -1,13 +1,80 @@
-// src/mock/data.js
+// src/mock/index.js
 import Mock from 'mockjs';
 
-export default [
+// 创建mock数据数组
+const mocks = [
+    {
+        url: '/api/home/tabs',
+        method: 'get',
+        timeout: 500,
+        response: () => {
+            return {
+                code: 0,
+                data: [
+                    { id: '1', name: '今日推荐' },
+                    { id: '2', name: '减肥餐' },
+                    { id: '3', name: '早餐' },
+                    { id: '4', name: '午餐' },
+                    { id: '5', name: '晚餐' },
+                    { id: '6', name: '甜点' }
+                ]
+            };
+        }
+    },
+    {
+        url: '/api/home/feed',
+        method: 'get',
+        timeout: 1000,
+        response: (req) => {
+            const tabId = req.query.tab || '1';
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = 10;
+
+            // 生成随机的帖子列表
+            const count = Mock.mock('@integer(20, 30)'); // 总数据量
+            const allItems = [];
+
+            // 预先生成所有数据
+            for (let i = 0; i < count; i++) {
+                const imgHeight = Mock.mock('@integer(200, 400)');
+                const imageUrl = Mock.Random.image(`300x${imgHeight}`, Mock.Random.color(), '#fff', 'png');
+
+                allItems.push({
+                    id: Mock.mock('@id'),
+                    title: Mock.mock('@ctitle(3, 8)'),
+                    coverImg: imageUrl,
+                    author: Mock.mock('@cname'),
+                    aspectRatio: `300/${imgHeight}`,
+                    likes: Mock.mock('@integer(100, 1000)'),
+                    comments: Mock.mock('@integer(0, 100)'),
+                    description: Mock.mock('@csentence(10, 20)')
+                });
+            }
+
+            // 分页处理
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const list = allItems.slice(start, end);
+            const hasMore = end < allItems.length;
+
+            return {
+                code: 0,
+                data: {
+                    tabId,
+                    list,
+                    page,
+                    pageSize,
+                    total: allItems.length,
+                    hasMore
+                }
+            };
+        }
+    },
     {
         url: '/api/search',
         method: 'get',
         timeout: 0,
-        response: (req, res) => {
-            // 提取搜索关键词
+        response: (req) => {
             const keyword = req.query.keyword || '';
 
             // 为不同关键词提供更相关的建议
@@ -68,7 +135,7 @@ export default [
         url: '/api/hotlist',
         method: 'get',
         timeout: 1000,
-        response: (req, res) => {
+        response: () => {
             return {
                 code: 0,
                 data: [
@@ -83,76 +150,13 @@ export default [
                 ]
             };
         }
-    },
-    {
-        url: '/api/home/tabs',
-        method: 'get',
-        timeout: 500,
-        response: () => {
-            return {
-                code: 0,
-                data: [
-                    { id: '1', name: '今日推荐' },
-                    { id: '2', name: '减肥餐' },
-                    { id: '3', name: '早餐' },
-                    { id: '4', name: '午餐' },
-                    { id: '5', name: '晚餐' },
-                    { id: '6', name: '甜点' }
-                ]
-            };
-        }
-    },
-
-    {
-        url: '/api/home/feed',
-        method: 'get',
-        timeout: 1000,
-        response: (req) => {
-            const tabId = req.query.tab || '1';
-            const page = parseInt(req.query.page) || 1;
-            const pageSize = 10;
-
-            // 生成随机的帖子列表
-            const count = Mock.mock('@integer(20, 30)'); // 总数据量
-            const allItems = [];
-
-            // 预先生成所有数据
-            for (let i = 0; i < count; i++) {
-                const imgHeight = Mock.mock('@integer(200, 400)');
-
-                // 生成有效的图片URL - 这是关键修改
-                const imageUrl = Mock.Random.image(`300x${imgHeight}`, Mock.Random.color(), '#fff', 'png');
-
-                allItems.push({
-                    id: Mock.mock('@id'),
-                    title: Mock.mock('@ctitle(3, 8)'),
-                    coverImg: imageUrl, // 使用生成的图片URL
-                    author: Mock.mock('@cname'),
-                    aspectRatio: `300/${imgHeight}`,
-                    likes: Mock.mock('@integer(100, 1000)'),
-                    comments: Mock.mock('@integer(0, 100)'),
-                    description: Mock.mock('@csentence(10, 20)')
-                });
-      }
-
-            // 分页处理
-            const start = (page - 1) * pageSize;
-            const end = start + pageSize;
-            const list = allItems.slice(start, end);
-            const hasMore = end < allItems.length;
-
-            return {
-                code: 0,
-                data: {
-                    tabId,
-                    list,
-                    page,
-                    pageSize,
-                    total: allItems.length,
-                    hasMore
-                }
-            };
-        }
     }
 ];
 
+// 导出设置函数，用于vite-plugin-mock
+export function setupProdMockServer() {
+    // 这里不需要额外代码，vite-plugin-mock会自动处理
+}
+
+// 导出mock数据
+export default mocks;
