@@ -5,9 +5,12 @@ import { Search, Cell, Tag, Button } from 'react-vant';
 import { ArrowLeft, FireO, ClockO, DeleteO } from '@react-vant/icons';
 import useSearchStore from '@/store/useSearchStore';
 import { debounce } from '@/utils';
+import useTitle from '@/hooks/useTitle';
 import styles from './search.module.css';
 
 const SearchPage = () => {
+  useTitle('搜索');
+
   const navigate = useNavigate();
   const {
     query,

@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './coze.module.css';
+import useTitle from '@/hooks/useTitle';
 
 export default function CreativeKitchen() {
+    useTitle('创意厨房');
+
     const [inputValue, setInputValue] = useState('');
     const [selected, setSelected] = useState([]);
     const [result, setResult] = useState(null);
