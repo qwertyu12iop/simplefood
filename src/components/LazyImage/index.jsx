@@ -1,6 +1,6 @@
 // src/components/LazyImage.jsx
 import React, { useRef, useState, useEffect } from 'react';
-import styles from './LazyImage.module.css';
+import styles from './lazyImage.module.css';
 
 const LazyImage = ({ src, aspectRatio = '300/200', alt }) => {
     const containerRef = useRef(null);

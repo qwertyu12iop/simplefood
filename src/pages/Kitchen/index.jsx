@@ -6,13 +6,12 @@ export default function CreativeKitchen() {
     const [selected, setSelected] = useState([]);
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
-    const previousResultRef = useRef(null); // 用于保存之前的结果
 
     const patToken = import.meta.env.VITE_PAT_TOKEN;
     const workflowUrl = 'https://api.coze.cn/v1/workflow/run';
     const workflow_id = '7537130191790571529';
 
-    // 精选健康食材列表
+    // 精选健康食材列表，数量适中避免过多滚动
     const availableIngredients = [
         '鸡蛋', '萝卜', '土豆', '番茄', '黄瓜', '菠菜', '洋葱', '胡萝卜', '玉米',
         '白菜', '芹菜', '韭菜', '西兰花', '青椒', '红椒', '豆角', '茄子',
@@ -32,10 +31,12 @@ export default function CreativeKitchen() {
         const ingredients = inputValue.split(',').map(s => s.trim()).filter(Boolean);
         const isSelected = ingredients.includes(name);
 
+        // 如果已选中则移除，否则添加
         let newIngredients;
         if (isSelected) {
             newIngredients = ingredients.filter(ingredient => ingredient !== name);
         } else {
+            // 未选中且数量未满才添加
             if (ingredients.length >= 5) return;
             newIngredients = [...ingredients, name];
         }
@@ -43,11 +44,6 @@ export default function CreativeKitchen() {
         const newInputValue = newIngredients.join(',');
         setInputValue(newInputValue);
         setSelected(newIngredients);
-
-        // 当食材变化时保存当前结果
-        if (result) {
-            previousResultRef.current = result;
-        }
     };
 
     const handleInputChange = (e) => {
@@ -55,11 +51,6 @@ export default function CreativeKitchen() {
         setInputValue(value);
         const ingredients = value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 5);
         setSelected(ingredients);
-
-        // 当食材变化时保存当前结果
-        if (result) {
-            previousResultRef.current = result;
-        }
     };
 
     const runWorkflow = async () => {
@@ -67,9 +58,7 @@ export default function CreativeKitchen() {
         if (!selected.length) return setResult({ error: '请先选择 1-5 种食材' });
 
         setLoading(true);
-        setResult(null); // 开始新请求时清空结果
-        previousResultRef.current = null; // 清除保存的结果
-
+        setResult(null);
         try {
             const res = await fetch(workflowUrl, {
                 method: 'POST',
@@ -126,9 +115,6 @@ export default function CreativeKitchen() {
         return <span className={styles.scoreAnimated}>{num}</span>;
     };
 
-    // 计算当前应显示的结果
-    const displayResult = result || previousResultRef.current;
-
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -174,29 +160,29 @@ export default function CreativeKitchen() {
             </section>
 
             <section className={styles.resultSection}>
-                {!displayResult && (
+                {!result && (
                     <div className={styles.placeholderCard}>
                         <div className={styles.placeholderTitle}>等待鉴赏...</div>
                     </div>
                 )}
 
-                {displayResult && displayResult.error && (
-                    <div className={styles.errorCard}>⚠️ {displayResult.error}</div>
+                {result && result.error && (
+                    <div className={styles.errorCard}>⚠️ {result.error}</div>
                 )}
 
-                {displayResult && !displayResult.error && (
+                {result && !result.error && (
                     <div className={styles.aiCard}>
                         <div className={styles.scoreBlock}>
                             <div className={styles.scoreLabel}>评分</div>
                             <div className={styles.scoreValueWrap}>
-                                <ScoreNumber value={displayResult.score ?? 0} />
+                                <ScoreNumber value={result.score ?? 0} />
                                 <span className={styles.scoreOutOf}>/10</span>
                             </div>
                         </div>
 
                         <div className={styles.commentBox}>
                             <div className={styles.commentHeader}>评价</div>
-                            <pre className={styles.commentText}>{displayResult.comment}</pre>
+                            <pre className={styles.commentText}>{result.comment}</pre>
                         </div>
                     </div>
                 )}
