@@ -28,7 +28,7 @@ const Profile = () => {
     nickname: '简小食',
     level: 'Lv3',
     slogan: '健康生活，从简食开始',
-    avatar: avatarImage, // Use the imported image variable
+    avatar: "https://c-ssl.duitang.com/uploads/blog/202307/17/YxSX3XQ2uqy63DD.jpg",
     points: 1280
   });
 
